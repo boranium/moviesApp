@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MoviesApp</string>
+    <string name="no_tagline">Tagline not provided</string>
+    <string name="language">Language</string>
+    <string name="budget">Budget</string>
+    <string name="vote_count">Vote Count</string>
 </resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    app:layout_constraintStart_toStartOf="@+id/tvItemMovieName"
+    app:layout_constraintTop_toBottomOf="@+id/tvItemMovieName">
+
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:layout_constraintStart_toStartOf="@+id/tvItemMovieName"
+        app:layout_constraintTop_toBottomOf="@+id/tvItemMovieName"
+        app:srcCompat="@drawable/ic_star" />
+
+    <TextView
+        android:id="@+id/tvItemMovieRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/SecondaryText"
+        android:layout_marginStart="4dp"
+        tools:text="6.4/10 IMDB"/>
+</LinearLayout>

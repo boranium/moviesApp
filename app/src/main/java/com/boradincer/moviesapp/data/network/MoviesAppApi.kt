@@ -1,6 +1,7 @@
 package com.boradincer.moviesapp.data.network
 
 import com.boradincer.moviesapp.BuildConfig
+import com.boradincer.moviesapp.data.model.MovieDetail
 import com.boradincer.moviesapp.data.model.responseModel.GetGenresResponseModel
 import com.boradincer.moviesapp.data.model.responseModel.GetMoviesResponseModel
 import okhttp3.Interceptor
@@ -11,19 +12,26 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface MoviesAppApi {
 
-    @GET("/genre/movie/list")
+    @GET("/3/genre/movie/list")
     suspend fun getGenres(): Response<GetGenresResponseModel>
 
-    @GET("/discover/movie")
+    @GET("/3/discover/movie")
     suspend fun getMovies(
         @Query("with_genres") genres: String? = null,
         @Query("with_keywords") keywords: String? = null,
+        @Query("page") page: Int
     ): Response<GetMoviesResponseModel>
+
+    @GET("/3/movie/{id}")
+    suspend fun getMovieDetail(
+        @Path("id") movieId: Int? = null,
+    ): Response<MovieDetail>
 
     companion object {
         operator fun invoke() : MoviesAppApi {
@@ -52,7 +60,7 @@ interface MoviesAppApi {
             return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
-                .baseUrl("https://api.themoviedb.org/3/")
+                .baseUrl("https://api.themoviedb.org/")
                 .build()
                 .create(MoviesAppApi::class.java)
         }
