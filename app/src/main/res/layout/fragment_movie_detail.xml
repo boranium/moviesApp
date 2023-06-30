@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
-    android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="invisible">
+    android:background="@color/white"
+    android:clickable="true"
+    android:visibility="invisible"
+    tools:visibility="visible">
 
     <ImageView
         android:id="@+id/ivMovieDetailPoster"
@@ -43,6 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,19 +51,19 @@
 
             <TextView
                 android:id="@+id/tvMovieDetailName"
+                style="@style/TitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TitleText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Lorem Ipsum Dolor Sit Amet"/>
+                tools:text="Lorem Ipsum Dolor Sit Amet" />
 
             <TextView
                 android:id="@+id/tvMovieDetailTagline"
+                style="@style/SecondaryText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                style="@style/SecondaryText"
                 android:textStyle="italic"
                 tools:text="TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView" />
 
@@ -70,14 +71,14 @@
                 android:id="@+id/rwMovieDetailRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMovieDetailGenres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                tools:listitem="@layout/item_genre"/>
+                tools:listitem="@layout/item_genre" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -101,19 +102,18 @@
 
             <TextView
                 android:id="@+id/tvMovieDetailOverviewTitle"
+                style="@style/TitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Description"
-                style="@style/TitleText" />
+                android:text="@string/description" />
 
             <TextView
                 android:id="@+id/tvMovieDetailOverview"
+                style="@style/SecondaryText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                style="@style/SecondaryText"  />
+                android:layout_marginTop="8dp" />
         </LinearLayout>
     </ScrollView>
 

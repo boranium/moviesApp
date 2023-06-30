@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">MoviesApp</string>
-    <string name="no_tagline">Tagline not provided</string>
-    <string name="language">Language</string>
-    <string name="budget">Budget</string>
-    <string name="vote_count">Vote Count</string>
-    <string name="check_internet">Check your internet connection.</string>
-    <string name="no_data">No data available</string>
+    <string name="no_tagline">No se proporcionó un lema</string>
+    <string name="language">Idioma</string>
+    <string name="budget">Presupuesto</string>
+    <string name="vote_count">Votos</string>
+    <string name="check_internet">Verifique su conexión a Internet.</string>
+    <string name="no_data">No hay datos disponibles</string>
+    <string name="description">Descripción</string>
+    <string name="an_error_occured">Ocurrió un error.</string>
+    <string name="try_again">¿Intentar de nuevo?</string>
+    <string name="search">Buscar</string>
+    <string name="search_by_keyword">Buscar por palabra clave</string>
+    <string name="reset">Restablecer</string>
 </resources>
