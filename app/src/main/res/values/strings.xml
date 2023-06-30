@@ -4,4 +4,6 @@
     <string name="language">Language</string>
     <string name="budget">Budget</string>
     <string name="vote_count">Vote Count</string>
+    <string name="check_internet">Check your internet connection.</string>
+    <string name="no_data">No data available</string>
 </resources>

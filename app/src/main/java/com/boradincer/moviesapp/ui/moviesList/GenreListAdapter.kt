@@ -25,6 +25,7 @@ class GenreListAdapter(
     }
 
     override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
+        // setting the data
         with(holder.recyclerViewListItemBinding) {
             tvWidgetGenreLabel.text = genreList[position].name
             root.isSelected = genreList[position].selected

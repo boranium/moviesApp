@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.boradincer.moviesapp.MainActivity
 import com.boradincer.moviesapp.R
 import com.boradincer.moviesapp.data.model.Movie
 import com.boradincer.moviesapp.databinding.FragmentMovieDetailBinding
-import com.boradincer.moviesapp.ui.moviesList.MoviesListFragment
-import com.boradincer.moviesapp.ui.moviesList.MoviesListFragmentViewModel
 import com.boradincer.moviesapp.util.BaseFragment
 import com.boradincer.moviesapp.util.formatAsMoney
-import com.boradincer.moviesapp.util.removeActionBarButtons
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,12 +20,6 @@ class MovieDetailFragment: BaseFragment() {
     private val binding get() = _binding!!
     private val detailViewModel: MovieDetailFragmentViewModel by viewModels()
 
-    companion object {
-        fun newInstance(): MoviesListFragment {
-            return MoviesListFragment()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,12 +28,11 @@ class MovieDetailFragment: BaseFragment() {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        // getting the selected movie parcelable
         getParcelable<Movie>("movie")?.let { movie ->
             detailViewModel.selectedMovie = movie
 
             setObservers()
-            setViews()
-            setListeners()
             initViewModel()
         }
 
@@ -54,17 +43,11 @@ class MovieDetailFragment: BaseFragment() {
         detailViewModel.getMovieDetail()
     }
 
-    private fun setListeners() {
-
-    }
-
-    private fun setViews() {
-
-    }
-
     private fun setObservers() {
+        // setting the data
         detailViewModel.movieDetail.observe(this) { movieDetail ->
             with(binding) {
+                root.visibility = View.VISIBLE
                 tvMovieDetailName.text = movieDetail.original_title
                 tvMovieDetailOverview.text = movieDetail.overview
                 with(movieDetail.tagline) {
@@ -94,10 +77,5 @@ class MovieDetailFragment: BaseFragment() {
         detailViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             (activity as MainActivity).setLoading(isLoading)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        activity?.removeActionBarButtons()
     }
 }

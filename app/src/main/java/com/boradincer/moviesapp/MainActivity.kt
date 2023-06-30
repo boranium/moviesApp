@@ -30,9 +30,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setLoading(isLoading: Boolean) {
-        if(isLoading)
-            binding.pbLoading.visibility = View.VISIBLE
-        else
-            binding.pbLoading.visibility = View.GONE
+        with(binding) {
+            if(isLoading) {
+                rootLayout.isClickable = false
+                pbLoading.visibility = View.VISIBLE
+            }
+            else {
+                rootLayout.isClickable = true
+                pbLoading.visibility = View.GONE
+            }
+        }
     }
 }

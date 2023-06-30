@@ -3,6 +3,7 @@ package com.boradincer.moviesapp.ui.movieDetail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.boradincer.moviesapp.R
 import com.boradincer.moviesapp.data.model.Movie
 import com.boradincer.moviesapp.data.model.MovieDetail
 import com.boradincer.moviesapp.data.model.MovieGenre
@@ -35,11 +36,11 @@ class MovieDetailFragmentViewModel @Inject constructor(
                                 movieDetailResponse.data?.let {
                                     movieDetail.value = it
                                 } ?: kotlin.run {
-                                    // todo empty state here
+                                    ErrorManager.showError(R.string.no_data)
                                 }
                             }
                             ApiStatus.ERROR -> {
-                                // todo error state here
+                                ErrorManager.showError(R.string.check_internet)
                             }
                             else -> {
 
@@ -50,8 +51,7 @@ class MovieDetailFragmentViewModel @Inject constructor(
                 }
             }
             else {
-                // todo error state here
-                ErrorManager.showError("")
+                ErrorManager.showError(R.string.check_internet)
                 loading.value = false
             }
         }

@@ -3,6 +3,7 @@ package com.boradincer.moviesapp.ui.moviesList
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.boradincer.moviesapp.R
 import com.boradincer.moviesapp.data.model.Movie
 import com.boradincer.moviesapp.data.network.ApiStatus
 import com.boradincer.moviesapp.data.network.MoviesAppRepository
@@ -19,11 +20,18 @@ class MoviesListFragmentViewModel @Inject constructor(
 ): ViewModel() {
     val moviesList = MutableLiveData<List<Movie>>()
     var selectedGenres = mutableListOf<Int>()
-    var selectedKeyword: String? = ""
+    var selectedKeyword: String? = null
     var isLastPage: Boolean = false
+    var errorOccured: Boolean = false
     var page: Int = 1
 
     val loading = MutableLiveData<Boolean>()
+
+    fun resetQuery() {
+        selectedGenres = mutableListOf()
+        selectedKeyword = ""
+        page = 1
+    }
 
     fun getMovies() {
         if(NetworkUtil.isNetworkAvailable()) {
@@ -41,11 +49,13 @@ class MoviesListFragmentViewModel @Inject constructor(
                                 if(it.page == it.total_pages)
                                     isLastPage = true
                             } ?: kotlin.run {
-                                // todo empty state here
+                                errorOccured = false
+                                moviesList.value = mutableListOf()
                             }
                         }
                         ApiStatus.ERROR -> {
-                            // todo error state here
+                            errorOccured = true
+                            moviesList.value = mutableListOf()
                         }
                         else -> {
 
@@ -56,8 +66,9 @@ class MoviesListFragmentViewModel @Inject constructor(
             }
         }
         else {
-            // todo error state here
-            ErrorManager.showError("")
+            ErrorManager.showError(R.string.check_internet)
+            errorOccured = true
+            moviesList.value = mutableListOf()
             loading.value = false
         }
     }
@@ -65,7 +76,6 @@ class MoviesListFragmentViewModel @Inject constructor(
     fun getGenres() {
         if(NetworkUtil.isNetworkAvailable()) {
             loading.value = true
-            val genresString = Movie.toGenresString(selectedGenres)
             if(selectedKeyword == "")
                 selectedKeyword = null
 
@@ -77,11 +87,13 @@ class MoviesListFragmentViewModel @Inject constructor(
                                 GenresManager.genresList.addAll(it.genres)
                                 getMovies()
                             } ?: kotlin.run {
-                                // todo empty state here
+                                errorOccured = false
+                                moviesList.value = mutableListOf()
                             }
                         }
                         ApiStatus.ERROR -> {
-                            // todo error state here
+                            errorOccured = true
+                            moviesList.value = mutableListOf()
                         }
                         else -> {
 
@@ -92,8 +104,9 @@ class MoviesListFragmentViewModel @Inject constructor(
             }
         }
         else {
-            // todo error state here
-            ErrorManager.showError("")
+            ErrorManager.showError(R.string.check_internet)
+            errorOccured = true
+            moviesList.value = mutableListOf()
             loading.value = false
         }
     }

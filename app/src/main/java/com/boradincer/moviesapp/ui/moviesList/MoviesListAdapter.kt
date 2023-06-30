@@ -42,6 +42,7 @@ class MoviesListAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        // setting the data
         with(holder.recyclerViewListItemBinding) {
             val movie = movieList[position]
             rootMovie.setOnClickListener {

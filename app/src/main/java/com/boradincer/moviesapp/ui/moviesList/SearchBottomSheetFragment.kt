@@ -15,10 +15,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchBottomSheetFragment(
-    private val moviesListFragmentViewModel: MoviesListFragmentViewModel
 ) : BottomSheetDialogFragment() {
     private var _binding: FragmentSearchDialogBinding? = null
     private val binding get() = _binding!!
+    lateinit var moviesListFragmentViewModel: MoviesListFragmentViewModel
+    fun newInstance(): SearchBottomSheetFragment {
+        return SearchBottomSheetFragment()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -47,6 +50,7 @@ class SearchBottomSheetFragment(
                 dismiss()
             }
 
+            // clean the query
             btnSearchNegative.setOnClickListener {
                 with(moviesListFragmentViewModel) {
                     selectedGenres = mutableListOf()
@@ -59,5 +63,12 @@ class SearchBottomSheetFragment(
         }
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if(!::moviesListFragmentViewModel.isInitialized)
+            dismiss()
     }
 }
